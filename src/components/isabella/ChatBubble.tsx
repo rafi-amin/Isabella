@@ -23,7 +23,7 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
     <div className={`flex items-end gap-3 ${isUser ? "justify-end" : "justify-start"}`}>
       {!isUser && (
         <Avatar className="h-8 w-8 shadow-sm">
-          <AvatarImage src="https://placehold.co/40x40/A98DFF/FFFFFF.png" alt="Isabella Avatar" data-ai-hint="robot assistant" />
+          <AvatarImage src="https://placehold.co/40x40/FCAD4D/FFFFFF.png" alt="Isabella Avatar" data-ai-hint="robot assistant" />
           <AvatarFallback>
             <Bot className="h-5 w-5 text-accent" />
           </AvatarFallback>
@@ -43,7 +43,7 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
       </div>
       {isUser && (
         <Avatar className="h-8 w-8 shadow-sm">
-           <AvatarImage src="https://placehold.co/40x40/79BAF2/FFFFFF.png" alt="User Avatar" data-ai-hint="person silhouette" />
+           <AvatarImage src="https://placehold.co/40x40/26C2D9/1A2B47.png" alt="User Avatar" data-ai-hint="person silhouette" />
           <AvatarFallback>
             <User className="h-5 w-5 text-primary" />
           </AvatarFallback>
