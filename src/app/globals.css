@@ -4,115 +4,62 @@
 
 body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
-  background-color: hsl(var(--background)); /* Fallback, main bg on #starfield-background */
+  background-color: hsl(var(--background));
   position: relative; 
-  overflow: hidden; /* To prevent scrollbars if stars go outside */
+  overflow: hidden; /* To prevent scrollbars if effects go outside */
+  min-height: 100vh;
 }
 
-#starfield-background {
+body::before,
+body::after {
+  content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: hsl(var(--background)); /* Actual dark background */
+  inset: -100%; /* Make pseudo-elements much larger than viewport */
   z-index: -1; /* Behind all content */
-  overflow: hidden; /* Important to contain stars */
+  will-change: transform, background-position; /* Performance hint */
 }
 
-/* Star generation using box-shadow */
-/* For a more "random" feel, vary x, y, and animation duration/delay slightly per star if desired, */
-/* but that makes the CSS extremely verbose. This is a simplified layer approach. */
-
-/* Small stars */
-#stars-small {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  --star-color: #FFFFFF;
-  --star-size: 1px;
-  box-shadow: 
-    5vw 10vh var(--star-color), 15vw 30vh var(--star-color), 25vw 5vh var(--star-color),
-    35vw 50vh var(--star-color), 45vw 20vh var(--star-color), 55vw 80vh var(--star-color),
-    65vw 15vh var(--star-color), 75vw 60vh var(--star-color), 85vw 5vh var(--star-color),
-    95vw 40vh var(--star-color), 5vw 90vh var(--star-color), 15vw 70vh var(--star-color),
-    25vw 95vh var(--star-color), 35vw 25vh var(--star-color), 45vw 75vh var(--star-color),
-    55vw 10vh var(--star-color), 65vw 85vh var(--star-color), 75vw 30vh var(--star-color),
-    85vw 65vh var(--star-color), 95vw 90vh var(--star-color), 10vw 45vh var(--star-color),
-    20vw 75vh var(--star-color), 30vw 15vh var(--star-color), 40vw 85vh var(--star-color),
-    50vw 25vh var(--star-color), 60vw 60vh var(--star-color), 70vw 5vh var(--star-color),
-    80vw 70vh var(--star-color), 90vw 30vh var(--star-color), 2vw 60vh var(--star-color),
-    12vw 5vh var(--star-color), 22vw 80vh var(--star-color), 32vw 30vh var(--star-color),
-    42vw 90vh var(--star-color), 52vw 10vh var(--star-color), 62vw 70vh var(--star-color),
-    72vw 20vh var(--star-color), 82vw 50vh var(--star-color), 92vw 80vh var(--star-color);
-  animation: animateStarsSmall 150s linear infinite;
-  width: var(--star-size); /* This actually sets the size of the "dot" for box-shadow */
-  height: var(--star-size);
-  background: transparent; /* Element itself should be transparent */
+body::before {
+  background-image: 
+    radial-gradient(ellipse at 20% 30%, hsl(var(--primary) / 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 20%, hsl(var(--accent) / 0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 40%, hsl(270, 60%, 15%, 0.3) 0%, transparent 60%), /* Deeper purple */
+    radial-gradient(ellipse at 30% 80%, hsl(240, 50%, 20%, 0.25) 0%, transparent 50%); /* Hint of blue */
+  background-size: 350% 350%;
+  animation: animateGalaxy 180s linear infinite;
+  opacity: 0.7;
 }
 
-/* Medium stars */
-#stars-medium {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  --star-color: #FFFFFF;
-  --star-size: 2px;
-  box-shadow: 
-    8vw 22vh var(--star-color), 18vw 55vh var(--star-color), 28vw 12vh var(--star-color),
-    38vw 78vh var(--star-color), 48vw 33vh var(--star-color), 58vw 90vh var(--star-color),
-    68vw 8vh var(--star-color), 78vw 67vh var(--star-color), 88vw 28vh var(--star-color),
-    98vw 72vh var(--star-color), 3vw 85vh var(--star-color), 13vw 15vh var(--star-color),
-    23vw 60vh var(--star-color), 33vw 5vh var(--star-color), 43vw 50vh var(--star-color),
-    53vw 95vh var(--star-color), 63vw 25vh var(--star-color), 73vw 70vh var(--star-color),
-    83vw 10vh var(--star-color), 93vw 40vh var(--star-color), 12vw 35vh var(--star-color),
-    27vw 80vh var(--star-color), 37vw 20vh var(--star-color), 50vw 65vh var(--star-color),
-    60vw 18vh var(--star-color), 70vw 88vh var(--star-color), 80vw 42vh var(--star-color),
-    90vw 5vh var(--star-color);
-  animation: animateStarsMedium 100s linear infinite;
-  width: var(--star-size);
-  height: var(--star-size);
-  background: transparent;
+body::after {
+  background-image: 
+    radial-gradient(ellipse at 70% 80%, hsl(var(--accent) / 0.3) 0%, transparent 45%),
+    radial-gradient(ellipse at 10% 60%, hsl(var(--primary) / 0.2) 0%, transparent 55%),
+    radial-gradient(ellipse at 60% 10%, hsl(270, 50%, 25%, 0.35) 0%, transparent 60%), /* Another purple shade */
+    radial-gradient(ellipse at 90% 50%, hsl(300, 70%, 20%, 0.25) 0%, transparent 50%); /* Magenta hint */
+  background-size: 400% 400%;
+  animation: animateGalaxy 240s linear infinite reverse; /* Different speed and direction */
+  opacity: 0.8;
 }
 
-/* Large stars */
-#stars-large {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  --star-color: #FFFFFF;
-  --star-size: 3px;
-  box-shadow: 
-    10vw 40vh var(--star-color), 20vw 80vh var(--star-color), 30vw 10vh var(--star-color),
-    40vw 60vh var(--star-color), 50vw 20vh var(--star-color), 60vw 90vh var(--star-color),
-    70vw 30vh var(--star-color), 80vw 70vh var(--star-color), 90vw 5vh var(--star-color),
-    5vw 65vh var(--star-color), 15vw 25vh var(--star-color), 25vw 75vh var(--star-color),
-    35vw 15vh var(--star-color), 45vw 85vh var(--star-color), 55vw 35vh var(--star-color),
-    65vw 50vh var(--star-color), 75vw 95vh var(--star-color), 85vw 45vh var(--star-color);
-  animation: animateStarsLarge 50s linear infinite;
-  width: var(--star-size);
-  height: var(--star-size);
-  background: transparent;
-}
-
-
-@keyframes animateStarsSmall {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-100vh); }
-}
-@keyframes animateStarsMedium {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-100vh); }
-}
-@keyframes animateStarsLarge {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-100vh); }
+@keyframes animateGalaxy {
+  0% {
+    transform: rotate(0deg) scale(1);
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.05);
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    background-position: 0% 0%;
+  }
 }
 
 
@@ -219,7 +166,7 @@ body {
   }
   body {
     @apply text-foreground;
-    min-height: 100vh;
+    /* min-height already set above */
   }
 }
 
