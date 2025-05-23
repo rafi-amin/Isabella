@@ -180,6 +180,10 @@ body::after {
     font-family: var(--font-lora), serif;
   }
 
+  .font-ibm-plex-sans {
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+  }
+
   .text-glow-effect {
     color: hsl(var(--foreground)); 
     text-shadow:

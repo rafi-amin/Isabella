@@ -198,7 +198,7 @@ export default function IsabellaPage() {
       case "permission_pending":
         icon = <Loader2 className="h-8 w-8 animate-spin" />;
         label = "Mic Permission...";
-        buttonClass = "bg-accent"; // Keep accent for pending, or choose another
+        buttonClass = "bg-accent"; 
         break;
       case "listening":
         icon = <Mic className="h-8 w-8" />;
@@ -231,8 +231,6 @@ export default function IsabellaPage() {
     if (isLoading && assistantStatus !== "transcribing" && assistantStatus !== "processing_command") {
        icon = <Loader2 className="h-8 w-8 animate-spin" />;
        label = "Processing...";
-       // If loading but not in specific transcribing/processing command state,
-       // consider if buttonClass should also be 'bg-accent' or similar
        if (assistantStatus !== 'idle') buttonClass = "bg-accent"; 
     }
 
@@ -241,6 +239,7 @@ export default function IsabellaPage() {
   };
 
   const { icon, label, isDisabled, buttonClass, pulse } = getButtonState();
+  const showLabelText = (!isDisabled || assistantStatus === "listening" || assistantStatus === "speaking" || assistantStatus === "error" || assistantStatus === "idle");
 
   return (
     <div className="flex flex-col items-center justify-between min-h-screen p-4 md:p-8 bg-transparent text-foreground">
@@ -272,7 +271,14 @@ export default function IsabellaPage() {
           >
             {icon}
           </Button>
-          <p className="mt-3 text-sm text-muted-foreground h-5">{!isDisabled || assistantStatus === "listening" || assistantStatus === "speaking" ? label : ""}</p>
+          <p className={`mt-3 text-sm h-5 font-ibm-plex-sans ${
+              assistantStatus === "idle" 
+                ? 'animate-gradient-subtitle' 
+                : (assistantStatus === "error" ? 'text-destructive/90' : 'text-muted-foreground')
+            }`}
+          >
+            {showLabelText ? label : ""}
+          </p>
         </div>
 
         <div className="tasks-area w-full mt-4 mb-8">

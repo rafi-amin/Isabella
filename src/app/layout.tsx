@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter, Fira_Code, Playfair_Display, Lora } from 'next/font/google';
+import { Inter, Fira_Code, Playfair_Display, Lora, IBM_Plex_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/toaster';
@@ -19,13 +19,19 @@ const firaCode = Fira_Code({
 const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
   subsets: ['latin'],
-  weight: ['400', '700'], // Include weights for normal and bold
+  weight: ['400', '700'], 
 });
 
 const lora = Lora({
   variable: '--font-lora',
   subsets: ['latin'],
-  weight: ['400', '700'], // Include weights for normal and bold
+  weight: ['400', '700'], 
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: '--font-ibm-plex-sans',
+  subsets: ['latin'],
+  weight: ['400', '600'], // Added 400 for regular, 600 for potential semibold
 });
 
 export const metadata: Metadata = {
@@ -40,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} antialiased`}>
+      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ibmPlexSans.variable} antialiased`}>
         {/* Galaxy background will be applied via CSS pseudo-elements on body */}
         <Providers>
           {children}
