@@ -174,6 +174,39 @@ body::after {
   .font-playfair {
     font-family: var(--font-playfair-display), serif;
   }
+
+  .text-glow-effect {
+    color: hsl(var(--foreground)); /* Should be white based on dark theme */
+    text-shadow:
+      0 0 6px hsl(var(--accent) / 0.6),  /* Accent color glow (Pink) */
+      0 0 12px hsl(var(--primary) / 0.4); /* Primary color glow (Magenta/Purple) */
+  }
+
+  .animate-gradient-subtitle {
+    background-image: linear-gradient(
+      to right,
+      hsl(280, 90%, 80%), /* Lighter Magenta/Purple */
+      hsl(295, 90%, 75%), /* Lavender Pink */
+      hsl(310, 90%, 80%)  /* Lighter Pink */
+    );
+    background-size: 250% auto;
+    background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
+    color: transparent;
+    animation: gradient-subtitle-x 10s linear infinite;
+  }
+
+  @keyframes gradient-subtitle-x {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 
 @keyframes pulse-mic {
@@ -189,11 +222,3 @@ body::after {
 .animate-pulse-mic {
   animation: pulse-mic 2s infinite;
 }
-
-.text-glow-effect {
-  color: hsl(var(--foreground));
-  text-shadow:
-    0 0 6px hsl(var(--accent) / 0.6),
-    0 0 12px hsl(var(--primary) / 0.4);
-}
-
