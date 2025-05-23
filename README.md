@@ -1,4 +1,4 @@
-# Firebase Studio
+# RaFI_aMIN Studio
 
 This is a NextJS starter by RAFI_AMIN.
 
