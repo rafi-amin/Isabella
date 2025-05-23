@@ -38,7 +38,7 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
         } backdrop-blur-sm bg-opacity-80`} 
       >
         <p className="text-sm whitespace-pre-wrap">{message.text}</p>
-        <p className={`text-xs mt-1 ${isUser ? 'text-primary-foreground/70 text-right' : 'text-muted-foreground text-left'}`}>
+        <p className={`text-xs mt-1 font-pt-serif animate-gradient-timestamp ${isUser ? 'text-right' : 'text-left'}`}>
           {timeAgo}
         </p>
       </div>

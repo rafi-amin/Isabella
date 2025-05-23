@@ -184,6 +184,10 @@ body::after {
     font-family: var(--font-ibm-plex-sans), sans-serif;
   }
 
+  .font-pt-serif {
+    font-family: var(--font-pt-serif), serif;
+  }
+
   .text-glow-effect {
     color: hsl(var(--foreground)); 
     text-shadow:
@@ -206,6 +210,32 @@ body::after {
   }
 
   @keyframes gradient-subtitle-x {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient-timestamp {
+    background-image: linear-gradient(
+      to right,
+      hsl(270, 70%, 80%), /* Light Purple */
+      hsl(0, 0%, 95%),    /* Light White/Off-white */
+      hsl(275, 70%, 82%)  /* Another Light Purple shade */
+    );
+    background-size: 250% auto;
+    background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
+    color: transparent;
+    animation: gradient-timestamp-x 10s linear infinite;
+  }
+
+  @keyframes gradient-timestamp-x {
     0% {
       background-position: 0% 50%;
     }
