@@ -13,8 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChatBubble, ChatMessage } from "@/components/isabella/ChatBubble";
+import { TypingIndicator } from "@/components/isabella/TypingIndicator";
 import { TaskList, TaskItem } from "@/components/isabella/TaskList";
 import { Mic, Loader2, Volume2, AlertTriangle, XCircle } from "lucide-react";
+import Image from "next/image";
+
 
 type AssistantStatus =
   | "idle"
@@ -59,7 +62,7 @@ export default function IsabellaPage() {
 
   useEffect(() => {
     chatContainerRef.current?.scrollTo({ top: chatContainerRef.current.scrollHeight, behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, assistantStatus]); // Added assistantStatus to scroll when typing indicator appears/disappears
 
   useEffect(() => {
     if (audioRecorder.status === "permission_pending") setAssistantStatus("permission_pending");
@@ -257,8 +260,8 @@ export default function IsabellaPage() {
               {messages.map((msg) => (
                 <ChatBubble key={msg.id} message={msg} />
               ))}
-               {(transcribeMutation.isPending || processCommandMutation.isPending || assistantStatus === "speaking" && messages[messages.length-1]?.sender === 'user') && (
-                 <ChatBubble message={{id: 'thinking', sender: 'isabella', text: 'Thinking...', timestamp: new Date()}}/>
+               {(transcribeMutation.isPending || processCommandMutation.isPending) && (
+                 <TypingIndicator />
                )}
             </div>
           </ScrollArea>
