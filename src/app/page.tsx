@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image"; // Import next/image
 import { useMutation } from "@tanstack/react-query";
 import { transcribeSpeech, TranscribeSpeechInput } from "@/ai/flows/transcribe-speech";
 import { processSpokenCommand, ProcessSpokenCommandInput, ProcessSpokenCommandOutput } from "@/ai/flows/process-command";
@@ -245,8 +246,15 @@ export default function IsabellaPage() {
     <div className="flex flex-col items-center justify-between min-h-screen p-4 md:p-8 bg-transparent text-foreground">
       <main className="container mx-auto max-w-3xl w-full flex flex-col flex-grow">
         <header className="text-center my-6 md:my-8">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-glow-effect font-playfair">Isabella</h1>
-          <p className="text-lg animate-gradient-subtitle font-lora">Your Personal AI Assistant</p>
+          <Image 
+            src="/isabella-logo.png" 
+            alt="Isabella Logo" 
+            width={300} 
+            height={57}
+            className="mx-auto" // Added for centering if parent text-align is not enough
+            priority // If it's above the fold
+          />
+          <p className="text-lg animate-gradient-subtitle font-lora mt-2">Your Personal AI Assistant</p>
         </header>
 
         <Card className="flex-grow flex flex-col shadow-xl overflow-hidden mb-6 bg-card/80 backdrop-blur-sm border-border/50">
