@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bot, User } from "lucide-react";
 import { formatDistanceToNow } from 'date-fns';
+import Image from "next/image";
 
 export interface ChatMessage {
   id: string;
@@ -23,8 +24,8 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
     <div className={`flex items-end gap-3 ${isUser ? "justify-end" : "justify-start"}`}>
       {!isUser && (
         <Avatar className="h-8 w-8 shadow-sm">
-          {/* Updated placeholder to match new dark theme: Bright Magenta/Purple with Light Pink/White text */}
-          <AvatarImage src="https://placehold.co/40x40/C653FF/FFF9FE.png" alt="Isabella Avatar" data-ai-hint="robot assistant" />
+          {/* Use the new custom avatar image */}
+          <AvatarImage src="/isabella-avatar.png" alt="Isabella Avatar" data-ai-hint="logo assistant" />
           <AvatarFallback>
             <Bot className="h-5 w-5 text-primary" />
           </AvatarFallback>
@@ -44,7 +45,7 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
       </div>
       {isUser && (
         <Avatar className="h-8 w-8 shadow-sm">
-           {/* Updated placeholder to match new dark theme: Bright Pink with Dark text */}
+           {/* User avatar remains a placeholder */}
            <AvatarImage src="https://placehold.co/40x40/F56BFF/150F1F.png" alt="User Avatar" data-ai-hint="person silhouette" />
           <AvatarFallback>
             <User className="h-5 w-5 text-accent" />
