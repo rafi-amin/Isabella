@@ -181,10 +181,10 @@ body::after {
   }
 
   .text-glow-effect {
-    color: hsl(var(--foreground)); /* Should be white based on dark theme */
+    color: hsl(var(--foreground)); 
     text-shadow:
-      0 0 6px hsl(var(--accent) / 0.6),  /* Accent color glow (Pink) */
-      0 0 12px hsl(var(--primary) / 0.4); /* Primary color glow (Magenta/Purple) */
+      0 0 6px hsl(var(--accent) / 0.6), 
+      0 0 12px hsl(var(--primary) / 0.4); 
   }
 
   .animate-gradient-subtitle {
@@ -211,6 +211,10 @@ body::after {
     100% {
       background-position: 0% 50%;
     }
+  }
+
+  .bg-mic-gradient {
+    background-image: linear-gradient(135deg, hsl(280, 75%, 70%) 0%, hsl(270, 10%, 30%) 100%);
   }
 }
 

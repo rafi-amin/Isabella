@@ -191,13 +191,14 @@ export default function IsabellaPage() {
 
     let icon = <Mic className="h-8 w-8" />;
     let label = "Tap to Speak";
-    let buttonClass = "bg-primary hover:bg-primary/90";
+    let buttonClass = "bg-mic-gradient hover:brightness-110 filter"; // Default gradient
     let pulse = false;
 
     switch (assistantStatus) {
       case "permission_pending":
         icon = <Loader2 className="h-8 w-8 animate-spin" />;
         label = "Mic Permission...";
+        buttonClass = "bg-accent"; // Keep accent for pending, or choose another
         break;
       case "listening":
         icon = <Mic className="h-8 w-8" />;
@@ -209,12 +210,12 @@ export default function IsabellaPage() {
       case "processing_command":
         icon = <Loader2 className="h-8 w-8 animate-spin text-accent-foreground" />;
         label = assistantStatus === "transcribing" ? "Transcribing..." : "Processing...";
-        buttonClass = "bg-accent"; // Using accent for processing states
+        buttonClass = "bg-accent"; 
         break;
       case "speaking":
         icon = <Volume2 className="h-8 w-8" />;
         label = "Isabella Speaking... Tap to Stop";
-        buttonClass = "bg-accent hover:bg-accent/90"; // Using accent for speaking state
+        buttonClass = "bg-accent hover:bg-accent/90"; 
         break;
       case "error":
         icon = <XCircle className="h-8 w-8" />;
@@ -223,13 +224,16 @@ export default function IsabellaPage() {
         break;
       case "idle":
       default:
-        // Default state is already set
+        // Default state (gradient) is already set for buttonClass
         break;
     }
     
     if (isLoading && assistantStatus !== "transcribing" && assistantStatus !== "processing_command") {
        icon = <Loader2 className="h-8 w-8 animate-spin" />;
        label = "Processing...";
+       // If loading but not in specific transcribing/processing command state,
+       // consider if buttonClass should also be 'bg-accent' or similar
+       if (assistantStatus !== 'idle') buttonClass = "bg-accent"; 
     }
 
 
