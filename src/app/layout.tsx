@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Fira_Code } from 'next/font/google';
+import { Inter, Fira_Code, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/toaster';
@@ -12,7 +12,13 @@ const inter = Inter({
 const firaCode = Fira_Code({
   variable: '--font-fira-code',
   subsets: ['latin'],
-  weight: ['400', '700'], // Example weights, adjust as needed
+  weight: ['400', '700'],
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: '--font-playfair-display',
+  subsets: ['latin'],
+  weight: ['400', '700'], // Include weights for normal and bold
 });
 
 export const metadata: Metadata = {
@@ -27,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${firaCode.variable} antialiased`}>
+      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} antialiased`}>
         {/* Galaxy background will be applied via CSS pseudo-elements on body */}
         <Providers>
           {children}

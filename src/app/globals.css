@@ -170,6 +170,12 @@ body::after {
   }
 }
 
+@layer components {
+  .font-playfair {
+    font-family: var(--font-playfair-display), serif;
+  }
+}
+
 @keyframes pulse-mic {
   0%, 100% {
     transform: scale(1);
@@ -190,3 +196,4 @@ body::after {
     0 0 6px hsl(var(--accent) / 0.6),
     0 0 12px hsl(var(--primary) / 0.4);
 }
+

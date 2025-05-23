@@ -242,7 +242,7 @@ export default function IsabellaPage() {
     <div className="flex flex-col items-center justify-between min-h-screen p-4 md:p-8 bg-transparent text-foreground">
       <main className="container mx-auto max-w-3xl w-full flex flex-col flex-grow">
         <header className="text-center my-6 md:my-8">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-glow-effect">Isabella</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-glow-effect font-playfair">Isabella</h1>
           <p className="text-muted-foreground text-lg">Your Personal AI Assistant</p>
         </header>
 
@@ -281,3 +281,4 @@ export default function IsabellaPage() {
     </div>
   );
 }
+
