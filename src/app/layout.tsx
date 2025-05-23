@@ -1,5 +1,6 @@
+
 import type { Metadata } from 'next';
-import { Inter, Fira_Code, Playfair_Display } from 'next/font/google';
+import { Inter, Fira_Code, Playfair_Display, Lora } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/toaster';
@@ -21,6 +22,12 @@ const playfairDisplay = Playfair_Display({
   weight: ['400', '700'], // Include weights for normal and bold
 });
 
+const lora = Lora({
+  variable: '--font-lora',
+  subsets: ['latin'],
+  weight: ['400', '700'], // Include weights for normal and bold
+});
+
 export const metadata: Metadata = {
   title: 'Isabella AI Assistant',
   description: 'Your personal AI assistant.',
@@ -33,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} antialiased`}>
+      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} antialiased`}>
         {/* Galaxy background will be applied via CSS pseudo-elements on body */}
         <Providers>
           {children}

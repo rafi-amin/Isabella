@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -173,6 +174,10 @@ body::after {
 @layer components {
   .font-playfair {
     font-family: var(--font-playfair-display), serif;
+  }
+  
+  .font-lora {
+    font-family: var(--font-lora), serif;
   }
 
   .text-glow-effect {

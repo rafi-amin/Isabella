@@ -243,7 +243,7 @@ export default function IsabellaPage() {
       <main className="container mx-auto max-w-3xl w-full flex flex-col flex-grow">
         <header className="text-center my-6 md:my-8">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-glow-effect font-playfair">Isabella</h1>
-          <p className="text-lg animate-gradient-subtitle">Your Personal AI Assistant</p>
+          <p className="text-lg animate-gradient-subtitle font-lora">Your Personal AI Assistant</p>
         </header>
 
         <Card className="flex-grow flex flex-col shadow-xl overflow-hidden mb-6 bg-card/80 backdrop-blur-sm border-border/50">
