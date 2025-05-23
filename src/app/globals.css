@@ -60,22 +60,22 @@ body {
   .dark {
     /* Dark theme - Deep Purple/Magenta inspired by the image */
     --background: 270 50% 8%;  /* Very dark, almost black purple */
-    --foreground: 280 80% 90%; /* Light lavender for text */
+    --foreground: 0 0% 100%; /* White */
 
     --card: 270 45% 12%; /* Darker purple for cards */
-    --card-foreground: 280 75% 88%;
+    --card-foreground: 0 0% 100%; /* White */
 
     --popover: 270 45% 12%;
-    --popover-foreground: 280 75% 88%;
+    --popover-foreground: 0 0% 100%; /* White */
 
     --primary: 280 80% 65%; /* Bright Magenta/Purple - for glowing elements */
     --primary-foreground: 300 100% 98%; /* Very Light Pink/White for text on primary */
 
     --secondary: 270 40% 18%; /* Darker purple, used for radial gradient center */
-    --secondary-foreground: 280 70% 85%;
+    --secondary-foreground: 0 0% 100%; /* White */
 
     --muted: 270 35% 20%; 
-    --muted-foreground: 280 50% 70%; 
+    --muted-foreground: 280 50% 70%; /* Lavender - for de-emphasized text */
 
     --accent: 300 90% 70%;   /* Bright Pink - for other highlights */
     --accent-foreground: 270 30% 10%; /* Dark for text on accent */
@@ -95,7 +95,7 @@ body {
 
     /* Dark Sidebar vars */
     --sidebar-background: 270 50% 7%; /* Even darker for sidebar */
-    --sidebar-foreground: 280 75% 88%;
+    --sidebar-foreground: 0 0% 100%; /* White */
     --sidebar-primary: 280 80% 60%; 
     --sidebar-primary-foreground: 300 100% 98%;
     --sidebar-accent: 300 85% 68%; 
