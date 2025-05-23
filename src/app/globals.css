@@ -180,10 +180,6 @@ body::after {
     font-family: var(--font-lora), serif;
   }
 
-  .font-ibm-plex-sans {
-    font-family: var(--font-ibm-plex-sans), sans-serif;
-  }
-
   .font-pt-serif {
     font-family: var(--font-pt-serif), serif;
   }

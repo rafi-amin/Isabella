@@ -276,10 +276,8 @@ export default function IsabellaPage() {
           >
             {icon}
           </Button>
-          <p className={`mt-3 text-sm h-5 font-ibm-plex-sans ${
-              assistantStatus === "idle" 
-                ? 'animate-gradient-subtitle' 
-                : (assistantStatus === "error" ? 'text-destructive/90' : 'text-muted-foreground')
+          <p className={`mt-3 text-sm h-5 ${
+              assistantStatus === "error" ? 'text-destructive/90' : 'text-muted-foreground'
             }`}
           >
             {showLabelText ? label : ""}

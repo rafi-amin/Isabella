@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter, Fira_Code, Playfair_Display, Lora, IBM_Plex_Sans, PT_Serif, Libre_Baskerville, Martian_Mono } from 'next/font/google';
+import { Inter, Fira_Code, Playfair_Display, Lora, PT_Serif, Libre_Baskerville, Martian_Mono } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/toaster';
@@ -26,12 +26,6 @@ const lora = Lora({
   variable: '--font-lora',
   subsets: ['latin'],
   weight: ['400', '700'], 
-});
-
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: '--font-ibm-plex-sans',
-  subsets: ['latin'],
-  weight: ['400', '600'], 
 });
 
 const ptSerif = PT_Serif({
@@ -64,7 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ibmPlexSans.variable} ${ptSerif.variable} ${libreBaskerville.variable} ${martianMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ptSerif.variable} ${libreBaskerville.variable} ${martianMono.variable} antialiased`}>
         {/* Galaxy background will be applied via CSS pseudo-elements on body */}
         <Providers>
           {children}
