@@ -23,7 +23,7 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
   return (
     <div className={`flex items-end gap-3 ${isUser ? "justify-end" : "justify-start"}`}>
       {!isUser && (
-        <Avatar className="h-8 w-8 shadow-sm">
+        <Avatar className="h-10 w-10 shadow-sm"> {/* Updated size here */}
           {/* Use the new custom avatar image */}
           <AvatarImage src="/isabella-avatar.png" alt="Isabella Avatar" data-ai-hint="logo assistant" />
           <AvatarFallback>
