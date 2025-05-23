@@ -185,9 +185,9 @@ body::after {
   .animate-gradient-subtitle {
     background-image: linear-gradient(
       to right,
-      hsl(280, 90%, 80%), /* Lighter Magenta/Purple */
-      hsl(295, 90%, 75%), /* Lavender Pink */
-      hsl(310, 90%, 80%)  /* Lighter Pink */
+      hsl(210, 85%, 75%), /* Light Blue */
+      hsl(0, 0%, 95%),    /* Light White/Off-white */
+      hsl(220, 80%, 80%)  /* Another Light Blue */
     );
     background-size: 250% auto;
     background-clip: text;
