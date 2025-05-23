@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter, Fira_Code, Playfair_Display, Lora, IBM_Plex_Sans, PT_Serif } from 'next/font/google';
+import { Inter, Fira_Code, Playfair_Display, Lora, IBM_Plex_Sans, PT_Serif, Libre_Baskerville } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/toaster';
@@ -40,6 +40,12 @@ const ptSerif = PT_Serif({
   weight: ['400', '700'],
 });
 
+const libreBaskerville = Libre_Baskerville({
+  variable: '--font-libre-baskerville',
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
 export const metadata: Metadata = {
   title: 'Isabella AI Assistant',
   description: 'Your personal AI assistant.',
@@ -52,7 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ibmPlexSans.variable} ${ptSerif.variable} antialiased`}>
+      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ibmPlexSans.variable} ${ptSerif.variable} ${libreBaskerville.variable} antialiased`}>
         {/* Galaxy background will be applied via CSS pseudo-elements on body */}
         <Providers>
           {children}

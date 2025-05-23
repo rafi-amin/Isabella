@@ -188,6 +188,10 @@ body::after {
     font-family: var(--font-pt-serif), serif;
   }
 
+  .font-libre-baskerville {
+    font-family: var(--font-libre-baskerville), serif;
+  }
+
   .text-glow-effect {
     color: hsl(var(--foreground)); 
     text-shadow:

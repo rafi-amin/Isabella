@@ -24,8 +24,8 @@ export const TaskList: FC<TaskListProps> = ({ tasks, onToggleTask, onDeleteTask 
     return (
       <div className="flex flex-col items-center justify-center text-center p-6 border border-dashed rounded-lg bg-muted/30">
         <Info className="h-12 w-12 text-muted-foreground mb-3" />
-        <p className="text-muted-foreground font-medium">No reminders yet</p>
-        <p className="text-sm text-muted-foreground">Isabella can help you set them up!</p>
+        <p className="text-muted-foreground font-medium font-libre-baskerville">No reminders yet</p>
+        <p className="text-sm text-muted-foreground font-libre-baskerville">Isabella can help you set them up!</p>
       </div>
     );
   }
