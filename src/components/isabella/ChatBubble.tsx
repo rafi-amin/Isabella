@@ -23,9 +23,10 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
     <div className={`flex items-end gap-3 ${isUser ? "justify-end" : "justify-start"}`}>
       {!isUser && (
         <Avatar className="h-8 w-8 shadow-sm">
-          <AvatarImage src="https://placehold.co/40x40/FCAD4D/FFFFFF.png" alt="Isabella Avatar" data-ai-hint="robot assistant" />
+          {/* Updated placeholder to match new dark theme: Bright Magenta/Purple with Light Pink/White text */}
+          <AvatarImage src="https://placehold.co/40x40/C653FF/FFF9FE.png" alt="Isabella Avatar" data-ai-hint="robot assistant" />
           <AvatarFallback>
-            <Bot className="h-5 w-5 text-accent" />
+            <Bot className="h-5 w-5 text-primary" />
           </AvatarFallback>
         </Avatar>
       )}
@@ -33,8 +34,8 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
         className={`max-w-[70%] rounded-xl p-3 shadow-md ${
           isUser
             ? "bg-primary text-primary-foreground rounded-br-none"
-            : "bg-card text-card-foreground rounded-bl-none border"
-        }`}
+            : "bg-card text-card-foreground rounded-bl-none border border-border/70" 
+        } backdrop-blur-sm bg-opacity-80`} 
       >
         <p className="text-sm whitespace-pre-wrap">{message.text}</p>
         <p className={`text-xs mt-1 ${isUser ? 'text-primary-foreground/70 text-right' : 'text-muted-foreground text-left'}`}>
@@ -43,9 +44,10 @@ export const ChatBubble: FC<ChatBubbleProps> = ({ message }) => {
       </div>
       {isUser && (
         <Avatar className="h-8 w-8 shadow-sm">
-           <AvatarImage src="https://placehold.co/40x40/26C2D9/1A2B47.png" alt="User Avatar" data-ai-hint="person silhouette" />
+           {/* Updated placeholder to match new dark theme: Bright Pink with Dark text */}
+           <AvatarImage src="https://placehold.co/40x40/F56BFF/150F1F.png" alt="User Avatar" data-ai-hint="person silhouette" />
           <AvatarFallback>
-            <User className="h-5 w-5 text-primary" />
+            <User className="h-5 w-5 text-accent" />
           </AvatarFallback>
         </Avatar>
       )}

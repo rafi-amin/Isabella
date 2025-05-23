@@ -53,6 +53,11 @@ export default function IsabellaPage() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Force dark theme
+    document.documentElement.classList.add('dark');
+  }, []);
+
+  useEffect(() => {
     chatContainerRef.current?.scrollTo({ top: chatContainerRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages]);
 
@@ -204,12 +209,12 @@ export default function IsabellaPage() {
       case "processing_command":
         icon = <Loader2 className="h-8 w-8 animate-spin text-accent-foreground" />;
         label = assistantStatus === "transcribing" ? "Transcribing..." : "Processing...";
-        buttonClass = "bg-accent";
+        buttonClass = "bg-accent"; // Using accent for processing states
         break;
       case "speaking":
         icon = <Volume2 className="h-8 w-8" />;
         label = "Isabella Speaking... Tap to Stop";
-        buttonClass = "bg-accent hover:bg-accent/90";
+        buttonClass = "bg-accent hover:bg-accent/90"; // Using accent for speaking state
         break;
       case "error":
         icon = <XCircle className="h-8 w-8" />;
@@ -234,14 +239,14 @@ export default function IsabellaPage() {
   const { icon, label, isDisabled, buttonClass, pulse } = getButtonState();
 
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen p-4 md:p-8 bg-background text-foreground">
+    <div className="flex flex-col items-center justify-between min-h-screen p-4 md:p-8 bg-transparent text-foreground">
       <main className="container mx-auto max-w-3xl w-full flex flex-col flex-grow">
         <header className="text-center my-6 md:my-8">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent text-transparent bg-clip-text">Isabella</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary text-transparent bg-clip-text animate-gradient-x">Isabella</h1>
           <p className="text-muted-foreground text-lg">Your Personal AI Assistant</p>
         </header>
 
-        <Card className="flex-grow flex flex-col shadow-xl overflow-hidden mb-6">
+        <Card className="flex-grow flex flex-col shadow-xl overflow-hidden mb-6 bg-card/80 backdrop-blur-sm border-border/50">
           <ScrollArea className="flex-grow p-4 md:p-6" ref={chatContainerRef}>
             <div className="space-y-6">
               {messages.map((msg) => (

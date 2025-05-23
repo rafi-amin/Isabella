@@ -4,101 +4,104 @@
 
 body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  background-image: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--secondary)));
+  /* Updated to radial gradient for a central glow effect */
+  background-image: radial-gradient(ellipse at center, hsl(var(--secondary)) 0%, hsl(var(--background)) 70%);
 }
 
 @layer base {
   :root {
-    --background: 220 30% 97%; /* Lighter, softer blue-gray */
-    --foreground: 220 25% 25%; /* Dark, slightly muted blue */
+    /* Light theme - Violet/Pink inspired */
+    --background: 270 60% 95%; /* Light Violet */
+    --foreground: 270 40% 20%; /* Dark Violet */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 220 25% 25%;
+    --card: 0 0% 100%; 
+    --card-foreground: 270 40% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 25%;
+    --popover-foreground: 270 40% 20%;
 
-    --primary: 190 70% 48%; /* Brighter Cyan/Teal */
-    --primary-foreground: 210 50% 15%; /* Dark blue for contrast */
+    --primary: 280 70% 55%; /* Magenta/Purple */
+    --primary-foreground: 300 100% 98%; /* Very Light Pink/White */
 
-    --secondary: 220 25% 92%; /* Soft blue-gray */
-    --secondary-foreground: 220 25% 30%; 
+    --secondary: 270 50% 90%; /* Lighter Violet */
+    --secondary-foreground: 270 40% 25%; 
 
-    --muted: 220 20% 90%; /* Lighter muted */
-    --muted-foreground: 220 15% 50%; /* Softer muted text */
+    --muted: 270 40% 85%; 
+    --muted-foreground: 270 30% 50%; 
 
-    --accent: 30 90% 60%; /* Vibrant Orange */
-    --accent-foreground: 0 0% 100%; /* White for text on accent */
+    --accent: 300 80% 65%; /* Bright Pink */
+    --accent-foreground: 270 40% 15%; 
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 85%; 
-    --input: 220 15% 94%; 
-    --ring: 190 70% 50%; /* Primary color for rings */
+    --border: 270 40% 80%; 
+    --input: 270 40% 92%; 
+    --ring: 280 70% 58%; 
 
-    --chart-1: 190 70% 55%;
-    --chart-2: 30 80% 65%;
-    --chart-3: 210 60% 50%;
-    --chart-4: 150 65% 45%;
-    --chart-5: 270 70% 60%;
+    --chart-1: 280 70% 55%;
+    --chart-2: 300 80% 65%;
+    --chart-3: 260 65% 50%;
+    --chart-4: 320 70% 58%;
+    --chart-5: 270 75% 60%;
     --radius: 0.5rem;
 
-    /* Sidebar vars */
-    --sidebar-background: 220 30% 95%;
-    --sidebar-foreground: 220 25% 28%;
-    --sidebar-primary: 190 70% 45%; 
-    --sidebar-primary-foreground: 210 50% 15%;
-    --sidebar-accent: 30 90% 58%; 
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 220 15% 82%;
-    --sidebar-ring: 190 70% 50%;
+    /* Sidebar vars - Light */
+    --sidebar-background: 270 60% 92%;
+    --sidebar-foreground: 270 40% 22%;
+    --sidebar-primary: 280 70% 52%; 
+    --sidebar-primary-foreground: 300 100% 98%;
+    --sidebar-accent: 300 80% 62%; 
+    --sidebar-accent-foreground: 270 40% 15%;
+    --sidebar-border: 270 40% 78%;
+    --sidebar-ring: 280 70% 55%;
   }
 
   .dark {
-    --background: 220 30% 10%; /* Very dark blue */
-    --foreground: 220 20% 90%; /* Light gray-blue */
+    /* Dark theme - Deep Purple/Magenta inspired by the image */
+    --background: 270 50% 8%;  /* Very dark, almost black purple */
+    --foreground: 280 80% 90%; /* Light lavender for text */
 
-    --card: 220 28% 15%; /* Slightly lighter dark card */
-    --card-foreground: 220 20% 90%;
+    --card: 270 45% 12%; /* Darker purple for cards */
+    --card-foreground: 280 75% 88%;
 
-    --popover: 220 28% 15%;
-    --popover-foreground: 220 20% 90%;
+    --popover: 270 45% 12%;
+    --popover-foreground: 280 75% 88%;
 
-    --primary: 190 70% 55%; /* Vibrant Cyan/Teal (slightly lighter for dark) */
-    --primary-foreground: 210 40% 95%; /* Very light for contrast */
+    --primary: 280 80% 65%; /* Bright Magenta/Purple - for glowing elements */
+    --primary-foreground: 300 100% 98%; /* Very Light Pink/White for text on primary */
 
-    --secondary: 220 25% 18%; /* Darker secondary */
-    --secondary-foreground: 220 15% 80%;
+    --secondary: 270 40% 18%; /* Darker purple, used for radial gradient center */
+    --secondary-foreground: 280 70% 85%;
 
-    --muted: 220 20% 22%; /* Darker muted */
-    --muted-foreground: 220 10% 60%; /* Softer dark muted text */
+    --muted: 270 35% 20%; 
+    --muted-foreground: 280 50% 70%; 
 
-    --accent: 30 85% 65%; /* Vibrant Orange (slightly lighter for dark) */
-    --accent-foreground: 210 50% 15%; /* Dark for contrast on orange */
+    --accent: 300 90% 70%;   /* Bright Pink - for other highlights */
+    --accent-foreground: 270 30% 10%; /* Dark for text on accent */
 
-    --destructive: 0 70% 50%;
+    --destructive: 0 70% 55%; /* Adjusted destructive for dark theme */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 25%;
-    --input: 220 15% 20%;
-    --ring: 190 70% 58%;
+    --border: 270 40% 25%;
+    --input: 270 40% 22%;
+    --ring: 280 80% 70%; /* Primary color for rings */
     
-    --chart-1: 190 70% 60%;
-    --chart-2: 30 80% 70%;
-    --chart-3: 210 60% 55%;
-    --chart-4: 150 65% 50%;
-    --chart-5: 270 70% 65%;
+    --chart-1: 280 70% 60%;
+    --chart-2: 300 75% 65%;
+    --chart-3: 260 65% 55%;
+    --chart-4: 320 70% 60%;
+    --chart-5: 270 75% 65%;
 
     /* Dark Sidebar vars */
-    --sidebar-background: 220 30% 8%;
-    --sidebar-foreground: 220 20% 88%;
-    --sidebar-primary: 190 70% 52%;
-    --sidebar-primary-foreground: 210 40% 95%;
-    --sidebar-accent: 30 85% 62%;
-    --sidebar-accent-foreground: 210 50% 15%;
-    --sidebar-border: 220 15% 22%;
-    --sidebar-ring: 190 70% 58%;
+    --sidebar-background: 270 50% 7%; /* Even darker for sidebar */
+    --sidebar-foreground: 280 75% 88%;
+    --sidebar-primary: 280 80% 60%; 
+    --sidebar-primary-foreground: 300 100% 98%;
+    --sidebar-accent: 300 85% 68%; 
+    --sidebar-accent-foreground: 270 30% 10%;
+    --sidebar-border: 270 40% 20%;
+    --sidebar-ring: 280 80% 68%;
   }
 }
 
