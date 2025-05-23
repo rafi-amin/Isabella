@@ -288,7 +288,7 @@ export default function IsabellaPage() {
         </div>
       </main>
       <footer className="text-center text-xs text-muted-foreground py-4">
-        Powered by GenAI & Next.js
+        Powered by RAFI_AMIN
       </footer>
     </div>
   );
