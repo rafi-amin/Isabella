@@ -28,6 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${firaCode.variable} antialiased`}>
+        <div id="starfield-background">
+          <div id="stars-small"></div>
+          <div id="stars-medium"></div>
+          <div id="stars-large"></div>
+        </div>
         <Providers>
           {children}
           <Toaster />
