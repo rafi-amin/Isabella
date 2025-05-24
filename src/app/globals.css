@@ -63,6 +63,94 @@ body::after {
   }
 }
 
+/* Shooting Stars Styles */
+#shooting-stars-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0; /* Above galaxy pseudos (-1), below most content (1+) */
+  pointer-events: none; /* So it doesn't interfere with clicks */
+  overflow: hidden; /* Clip stars that go way off */
+}
+
+.shooting-star {
+  position: absolute;
+  width: 3px;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+  border-radius: 50% / 8px; /* Tapered streak */
+  opacity: 0; /* Start invisible */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Path 1: From top-left area, shoots towards bottom-right */
+@keyframes shoot-path-1 {
+  0% { opacity: 0; transform: translateY(0) translateX(0) rotate(45deg) scaleY(0.7); }
+  10% { opacity: 0.9; transform: translateY(0) translateX(0) rotate(45deg) scaleY(1); }
+  90% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(70vh) translateX(70vw) rotate(45deg) scaleY(0.7); }
+}
+
+/* Path 2: From top-right area, shoots towards bottom-left */
+@keyframes shoot-path-2 {
+  0% { opacity: 0; transform: translateY(0) translateX(0) rotate(135deg) scaleY(0.7); }
+  10% { opacity: 0.9; transform: translateY(0) translateX(0) rotate(135deg) scaleY(1); }
+  90% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(70vh) translateX(-70vw) rotate(135deg) scaleY(0.7); }
+}
+
+/* Path 3: More vertical, from top-mid, shoots down-ish */
+@keyframes shoot-path-3 {
+  0% { opacity: 0; transform: translateY(0) translateX(0) rotate(5deg) scaleY(0.7); } /* Slight angle from vertical */
+  10% { opacity: 0.9; transform: translateY(0) translateX(0) rotate(5deg) scaleY(1); }
+  90% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(80vh) translateX(10vw) rotate(5deg) scaleY(0.7); }
+}
+
+.shooting-star:nth-child(1) {
+  top: 5vh;
+  left: 5vw;
+  animation-name: shoot-path-1;
+  animation-duration: 3s;
+  animation-delay: 0s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 10vh;
+  left: 80vw;
+  animation-name: shoot-path-2;
+  animation-duration: 2.5s;
+  animation-delay: 1.5s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 2vh;
+  left: 45vw;
+  animation-name: shoot-path-3;
+  animation-duration: 2s;
+  animation-delay: 0.5s;
+}
+
+.shooting-star:nth-child(4) {
+  top: 15vh;
+  left: 10vw;
+  width: 2px; /* Smaller star */
+  height: 100px; /* Shorter tail */
+  animation-name: shoot-path-1;
+  animation-duration: 3.5s;
+  animation-delay: 2.5s;
+}
+
+.shooting-star:nth-child(5) {
+  top: 20vh;
+  left: 70vw;
+  animation-name: shoot-path-2;
+  animation-duration: 3s;
+  animation-delay: 3.5s;
+}
+
 
 @layer base {
   :root {

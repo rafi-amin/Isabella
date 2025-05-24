@@ -65,7 +65,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ptSerif.variable} ${libreBaskerville.variable} ${ibmPlexSans.variable} ${martianMono.variable} antialiased`}>
-        {/* Galaxy background will be applied via CSS pseudo-elements on body */}
+        <div id="shooting-stars-overlay">
+          <div className="shooting-star"></div>
+          <div className="shooting-star"></div>
+          <div className="shooting-star"></div>
+          <div className="shooting-star"></div>
+          <div className="shooting-star"></div>
+        </div>
         <Providers>
           {children}
           <Toaster />
