@@ -9,13 +9,11 @@ import { useAudioRecorder, AudioRecorderStatus } from "@/hooks/useAudioRecorder"
 import { useSpeechSynthesis } from "@/hooks/useSpeechSynthesis";
 import { useToast } from "@/hooks/use-toast";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChatBubble, ChatMessage } from "@/components/isabella/ChatBubble";
-// TypingIndicator import removed
 import { TaskList, TaskItem } from "@/components/isabella/TaskList";
-import { Mic, Loader2, Volume2, AlertTriangle, XCircle } from "lucide-react";
+import { PromptInputArea } from "@/components/isabella/PromptInputArea"; // Added import
 import Image from "next/image";
 
 
@@ -42,7 +40,7 @@ export default function IsabellaPage() {
     {
       id: "initial",
       sender: "isabella",
-      text: "Hello! I'm Isabella. How can I help you today? Tap the microphone to speak.",
+      text: "Hello! I'm Isabella. How can I help you today? Tap the microphone or a suggestion to get started.",
       timestamp: new Date(),
     },
   ]);
@@ -62,7 +60,7 @@ export default function IsabellaPage() {
 
   useEffect(() => {
     chatContainerRef.current?.scrollTo({ top: chatContainerRef.current.scrollHeight, behavior: 'smooth' });
-  }, [messages]); // assistantStatus dependency removed
+  }, [messages]);
 
   useEffect(() => {
     if (audioRecorder.status === "permission_pending") setAssistantStatus("permission_pending");
@@ -76,7 +74,7 @@ export default function IsabellaPage() {
   useEffect(() => {
     if (speechSynthesis.error) {
       toast({ title: "Speech Error", description: speechSynthesis.error, variant: "destructive" });
-      setAssistantStatus("idle"); // Or error if critical
+      setAssistantStatus("idle"); 
     }
   }, [speechSynthesis.error, toast]);
   
@@ -125,9 +123,7 @@ export default function IsabellaPage() {
         setAssistantStatus("idle");
       }
 
-      // Handle actions like scheduling tasks
       if (data.action === "task_scheduled" || data.response.toLowerCase().includes("reminder set") || data.response.toLowerCase().includes("task added")) {
-        // Simple task addition based on response text. More robust parsing would be needed for complex tasks.
         const newTaskText = data.response.substring(data.response.toLowerCase().indexOf(":") + 1).trim() || data.response;
         setTasks((prevTasks) => [
           ...prevTasks,
@@ -162,22 +158,38 @@ export default function IsabellaPage() {
           toast({ title: "Audio Processing Error", description: "Failed to process audio data.", variant: "destructive" });
           setAssistantStatus("error");
         });
-      audioRecorder.reset(); // Reset recorder after processing blob
+      audioRecorder.reset(); 
     }
   }, [audioRecorder.status, audioRecorder.audioBlob, audioRecorder, transcribeMutation, toast]);
 
 
-  const handleMicClick = useCallback(() => {
+  const handleMicButtonClick = useCallback(() => {
     if (assistantStatus === "listening") {
       audioRecorder.stopRecording();
     } else if (["idle", "error"].includes(assistantStatus)) {
       audioRecorder.startRecording();
     } else if (assistantStatus === "speaking") {
-      speechSynthesis.cancel(); // Allow interrupting Isabella
+      speechSynthesis.cancel(); 
       setAssistantStatus("idle");
     }
-    // For other states, button might be disabled or have specific behavior.
   }, [assistantStatus, audioRecorder, speechSynthesis]);
+
+  const handleSuggestionClick = useCallback((suggestion: string) => {
+    if (isProcessing) {
+        toast({ title: "Processing", description: "Please wait for the current request to complete.", variant: "default" });
+        return;
+    }
+    const userMessage: ChatMessage = {
+      id: crypto.randomUUID(),
+      sender: "user",
+      text: suggestion,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessage]);
+    setAssistantStatus("processing_command");
+    processCommandMutation.mutate({ spokenCommand: suggestion });
+  }, [processCommandMutation, toast, assistantStatus]);
+
 
   const toggleTask = (taskId: string) => {
     setTasks(tasks.map(task => task.id === taskId ? { ...task, completed: !task.completed } : task));
@@ -187,62 +199,8 @@ export default function IsabellaPage() {
     setTasks(tasks.filter(task => task.id !== taskId));
     toast({ title: "Reminder Deleted", description: "The reminder has been removed."});
   };
-
-  const getButtonState = () => {
-    const isLoading = transcribeMutation.isPending || processCommandMutation.isPending;
-    const isDisabled = isLoading || ["permission_pending", "transcribing", "processing_command"].includes(assistantStatus);
-
-    let icon = <Mic className="h-8 w-8" />;
-    let label = "Tap to Speak";
-    let buttonClass = "bg-mic-gradient hover:brightness-110 filter"; // Default gradient
-    let pulse = false;
-
-    switch (assistantStatus) {
-      case "permission_pending":
-        icon = <Loader2 className="h-8 w-8 animate-spin" />;
-        label = "Mic Permission...";
-        buttonClass = "bg-accent"; 
-        break;
-      case "listening":
-        icon = <Mic className="h-8 w-8" />;
-        label = "Listening... Tap to Stop";
-        buttonClass = "bg-destructive hover:bg-destructive/90";
-        pulse = true;
-        break;
-      case "transcribing":
-      case "processing_command":
-        icon = <Loader2 className="h-8 w-8 animate-spin text-accent-foreground" />;
-        label = assistantStatus === "transcribing" ? "Transcribing..." : "Processing...";
-        buttonClass = "bg-accent"; 
-        break;
-      case "speaking":
-        icon = <Volume2 className="h-8 w-8" />;
-        label = "Isabella Speaking... Tap to Stop";
-        buttonClass = "bg-accent hover:bg-accent/90"; 
-        break;
-      case "error":
-        icon = <XCircle className="h-8 w-8" />;
-        label = "Error! Tap to Retry";
-        buttonClass = "bg-destructive hover:bg-destructive/90";
-        break;
-      case "idle":
-      default:
-        // Default state (gradient) is already set for buttonClass
-        break;
-    }
-    
-    if (isLoading && assistantStatus !== "transcribing" && assistantStatus !== "processing_command") {
-       icon = <Loader2 className="h-8 w-8 animate-spin" />;
-       label = "Processing...";
-       if (assistantStatus !== 'idle') buttonClass = "bg-accent"; 
-    }
-
-
-    return { icon, label, isDisabled, buttonClass, pulse };
-  };
-
-  const { icon, label, isDisabled, buttonClass, pulse } = getButtonState();
-  const showLabelText = (!isDisabled || assistantStatus === "listening" || assistantStatus === "speaking" || assistantStatus === "error" || assistantStatus === "idle");
+  
+  const isProcessing = transcribeMutation.isPending || processCommandMutation.isPending;
 
   return (
     <div className="flex flex-col items-center justify-between min-h-screen p-4 md:p-8 bg-transparent text-foreground">
@@ -260,7 +218,6 @@ export default function IsabellaPage() {
               {messages.map((msg) => (
                 <ChatBubble key={msg.id} message={msg} />
               ))}
-               {/* TypingIndicator removed, was here */}
                {(transcribeMutation.isPending || processCommandMutation.isPending) && messages[messages.length -1]?.sender === 'user' && (
                  <ChatBubble message={{id: 'thinking-indicator', sender: 'isabella', text: 'Thinking...', timestamp: new Date()}} />
                 )}
@@ -268,25 +225,14 @@ export default function IsabellaPage() {
           </ScrollArea>
         </Card>
         
+        {/* Replaced old mic button with PromptInputArea */}
         <div className="input-area flex flex-col items-center justify-center mb-6 py-4">
-          <Button
-            onClick={handleMicClick}
-            disabled={isDisabled && assistantStatus !== "listening" && assistantStatus !== "speaking"}
-            className={`rounded-full h-20 w-20 md:h-24 md:w-24 flex flex-col items-center justify-center shadow-lg transition-all duration-300 ease-in-out focus-visible:ring-4 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${buttonClass} ${pulse ? 'animate-pulse-mic' : ''}`}
-            aria-label={label}
-          >
-            {icon}
-          </Button>
-          <p className={`mt-3 text-sm h-5 font-ibm-plex-sans ${
-              assistantStatus === "idle"
-                ? "animate-gradient-subtitle" 
-                : assistantStatus === "error"
-                ? "text-destructive/90"
-                : "text-muted-foreground"
-            }`}
-          >
-            {showLabelText ? label : ""}
-          </p>
+           <PromptInputArea 
+            onSuggestionClick={handleSuggestionClick}
+            onMicClick={handleMicButtonClick}
+            assistantStatus={assistantStatus}
+            isProcessing={isProcessing}
+          />
         </div>
 
         <div className="tasks-area w-full mt-4 mb-8">
