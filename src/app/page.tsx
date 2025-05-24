@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChatBubble, ChatMessage } from "@/components/isabella/ChatBubble";
-import { TypingIndicator } from "@/components/isabella/TypingIndicator";
+// TypingIndicator import removed
 import { TaskList, TaskItem } from "@/components/isabella/TaskList";
 import { Mic, Loader2, Volume2, AlertTriangle, XCircle } from "lucide-react";
 import Image from "next/image";
@@ -62,7 +62,7 @@ export default function IsabellaPage() {
 
   useEffect(() => {
     chatContainerRef.current?.scrollTo({ top: chatContainerRef.current.scrollHeight, behavior: 'smooth' });
-  }, [messages, assistantStatus]); // Added assistantStatus to scroll when typing indicator appears/disappears
+  }, [messages]); // assistantStatus dependency removed
 
   useEffect(() => {
     if (audioRecorder.status === "permission_pending") setAssistantStatus("permission_pending");
@@ -260,9 +260,10 @@ export default function IsabellaPage() {
               {messages.map((msg) => (
                 <ChatBubble key={msg.id} message={msg} />
               ))}
-               {(transcribeMutation.isPending || processCommandMutation.isPending) && (
-                 <TypingIndicator />
-               )}
+               {/* TypingIndicator removed, was here */}
+               {(transcribeMutation.isPending || processCommandMutation.isPending) && messages[messages.length -1]?.sender === 'user' && (
+                 <ChatBubble message={{id: 'thinking-indicator', sender: 'isabella', text: 'Thinking...', timestamp: new Date()}} />
+                )}
             </div>
           </ScrollArea>
         </Card>
@@ -276,8 +277,12 @@ export default function IsabellaPage() {
           >
             {icon}
           </Button>
-          <p className={`mt-3 text-sm h-5 ${
-              assistantStatus === "error" ? 'text-destructive/90' : 'text-muted-foreground'
+          <p className={`mt-3 text-sm h-5 font-ibm-plex-sans ${
+              assistantStatus === "idle"
+                ? "animate-gradient-subtitle" 
+                : assistantStatus === "error"
+                ? "text-destructive/90"
+                : "text-muted-foreground"
             }`}
           >
             {showLabelText ? label : ""}
@@ -288,7 +293,7 @@ export default function IsabellaPage() {
           <TaskList tasks={tasks} onToggleTask={toggleTask} onDeleteTask={deleteTask} />
         </div>
       </main>
-      <footer className="text-center text-xs font-martian-mono text-foreground py-4">
+      <footer className="text-center text-xs text-muted-foreground py-4">
         Powered by RAFI_AMIN
       </footer>
     </div>

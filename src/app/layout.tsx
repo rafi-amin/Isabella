@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter, Fira_Code, Playfair_Display, Lora, PT_Serif, Libre_Baskerville, Martian_Mono } from 'next/font/google';
+import { Inter, Fira_Code, Playfair_Display, Lora, PT_Serif, Libre_Baskerville, IBM_Plex_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/toaster';
@@ -40,10 +40,10 @@ const libreBaskerville = Libre_Baskerville({
   weight: ['400', '700'],
 });
 
-const martianMono = Martian_Mono({
-  variable: '--font-martian-mono',
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: '--font-ibm-plex-sans',
   subsets: ['latin'],
-  weight: ['400'], // Using regular weight
+  weight: ['400', '500', '700'],
 });
 
 export const metadata: Metadata = {
@@ -58,7 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ptSerif.variable} ${libreBaskerville.variable} ${martianMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${firaCode.variable} ${playfairDisplay.variable} ${lora.variable} ${ptSerif.variable} ${libreBaskerville.variable} ${ibmPlexSans.variable} antialiased`}>
         {/* Galaxy background will be applied via CSS pseudo-elements on body */}
         <Providers>
           {children}
