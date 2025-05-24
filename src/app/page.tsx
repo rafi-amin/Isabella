@@ -293,7 +293,7 @@ export default function IsabellaPage() {
           <TaskList tasks={tasks} onToggleTask={toggleTask} onDeleteTask={deleteTask} />
         </div>
       </main>
-      <footer className="text-center text-xs text-muted-foreground py-4">
+      <footer className="text-center text-xs text-foreground font-martian-mono py-4">
         Powered by RAFI_AMIN
       </footer>
     </div>

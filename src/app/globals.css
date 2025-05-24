@@ -192,6 +192,10 @@ body::after {
     font-family: var(--font-ibm-plex-sans), sans-serif;
   }
 
+  .font-martian-mono {
+    font-family: var(--font-martian-mono), monospace;
+  }
+
   .text-glow-effect {
     color: hsl(var(--foreground)); 
     text-shadow:
